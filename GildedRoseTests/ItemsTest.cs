@@ -22,6 +22,15 @@ namespace GildedRoseTests
         }
 
         [Fact]
+        public void Test_QualityDecreases()
+        {
+            var item = new Item { Name = UNKNOWN_ITEM, SellIn = 0, Quality = 1 };
+            var rose = new GildedRose(new List<Item> { item });
+            rose.UpdateQuality();
+            Assert.Equal(0, item.Quality);
+        }
+
+        [Fact]
         public void Test_QualityIsNeverNegative()
         {
             var item = new Item { Name = UNKNOWN_ITEM, SellIn = 1, Quality = 0 };
