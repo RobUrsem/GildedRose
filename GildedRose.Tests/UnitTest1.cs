@@ -42,5 +42,23 @@ namespace GildedRoseTests
             //--- Verify
             Assert.Equal(19, items[0].Quality);
         }
+
+        //- Once the sell by date has passed, `Quality` degrades twice as fast
+        [Fact]
+        public void Test_QualityDegredationIncreasesAfterSellByDate()
+        {
+            //--- Setup
+            var items = new List<Item> {
+                new Item { Name = REGULAR_ITEM, SellIn = 0, Quality = 20 },
+            };
+            var rose = new GildedRose(items);
+
+            //--- Action
+            rose.UpdateQuality();
+
+            //--- Verify
+            Assert.Equal(18, items[0].Quality);
+        }
+
     }
 }
