@@ -6,6 +6,7 @@ namespace GildedRoseTests
     {
         const string UNKNOWN_ITEM = "foo";
         const string BRIE = "Aged Brie";
+        const string SULFURAS = "Sulfuras, Hand of Ragnaros";
 
         [Fact]
         public void Test_SellInDecreases()
@@ -24,7 +25,16 @@ namespace GildedRoseTests
         [Fact]
         public void Test_QualityDecreases()
         {
-            var item = new Item { Name = UNKNOWN_ITEM, SellIn = 0, Quality = 1 };
+            var item = new Item { Name = UNKNOWN_ITEM, SellIn = 1, Quality = 2 };
+            var rose = new GildedRose(new List<Item> { item });
+            rose.UpdateQuality();
+            Assert.Equal(1, item.Quality);
+        }
+
+        [Fact]
+        public void Test_QualityDecreasesTwiceAsFastAfterSellByDate()
+        {
+            var item = new Item { Name = UNKNOWN_ITEM, SellIn = 0, Quality = 2 };
             var rose = new GildedRose(new List<Item> { item });
             rose.UpdateQuality();
             Assert.Equal(0, item.Quality);
@@ -50,7 +60,7 @@ namespace GildedRoseTests
 
 
         [Fact]
-        public void Test_QualityIsNeverMoreThanFifty() 
+        public void Test_QualityIsNeverMoreThanFifty()
         {
             var item = new Item { Name = BRIE, SellIn = 1, Quality = 50 };
             var rose = new GildedRose(new List<Item> { item });
@@ -59,12 +69,30 @@ namespace GildedRoseTests
         }
 
         [Fact]
-        public void Test_QualityDegradesTwiceAsFastAfterSellByDate()
+        public void Test_DefaultQualityIsNeverMoreThanFifty()
         {
-            var item = new Item { Name = UNKNOWN_ITEM, SellIn = 0, Quality = 10 };
+            var item = new Item { Name = UNKNOWN_ITEM, SellIn = 1, Quality = 51 };
             var rose = new GildedRose(new List<Item> { item });
             rose.UpdateQuality();
-            Assert.Equal(8, item.Quality);
+            Assert.Equal(50, item.Quality);
+        }
+
+        [Fact]
+        public void Test_SulfurasSellInDoesntDecrease()
+        {
+            var item = new Item { Name = SULFURAS, SellIn = 1, Quality = 1 };
+            var rose = new GildedRose(new List<Item> { item });
+            rose.UpdateQuality();
+            Assert.Equal(1, item.SellIn);
+        }
+
+        [Fact]
+        public void Test_SulfurasQualityDoesntDecrease()
+        {
+            var item = new Item { Name = SULFURAS, SellIn = 1, Quality = 1 };
+            var rose = new GildedRose(new List<Item> { item });
+            rose.UpdateQuality();
+            Assert.Equal(1, item.Quality);
         }
     }
 }
