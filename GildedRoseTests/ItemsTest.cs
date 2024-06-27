@@ -1,4 +1,6 @@
 using GildedRoseKata;
+using Newtonsoft.Json.Linq;
+using System.Diagnostics.Metrics;
 
 namespace GildedRoseTests
 {
@@ -7,6 +9,7 @@ namespace GildedRoseTests
         const string UNKNOWN_ITEM = "foo";
         const string BRIE = "Aged Brie";
         const string SULFURAS = "Sulfuras, Hand of Ragnaros";
+        const string BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
 
         [Fact]
         public void Test_SellInDecreases()
@@ -93,6 +96,18 @@ namespace GildedRoseTests
             var rose = new GildedRose(new List<Item> { item });
             rose.UpdateQuality();
             Assert.Equal(1, item.Quality);
+        }
+
+        //- "Backstage passes", like aged brie, increases in `Quality` as its `SellIn` value approaches;
+        //- `Quality` increases by `2` when there are `10` days or less and by `3` when there are `5` days or less but
+        //- `Quality` drops to `0` after the concert
+        [Fact]
+        public void Test_BackStagePassesIncreaseByTwoIfLessThanTenDays()
+        {
+            var item = new Item { Name = BACKSTAGE, SellIn = 10, Quality = 1 };
+            var rose = new GildedRose(new List<Item> { item });
+            rose.UpdateQuality();
+            Assert.Equal(3, item.Quality);
         }
     }
 }
