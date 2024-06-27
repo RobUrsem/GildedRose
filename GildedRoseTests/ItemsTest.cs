@@ -101,13 +101,16 @@ namespace GildedRoseTests
         //- "Backstage passes", like aged brie, increases in `Quality` as its `SellIn` value approaches;
         //- `Quality` increases by `2` when there are `10` days or less and by `3` when there are `5` days or less but
         //- `Quality` drops to `0` after the concert
-        [Fact]
-        public void Test_BackStagePassesIncreaseByTwoIfLessThanTenDays()
+        [Theory]
+        [InlineData(10, 1, 3)]
+        [InlineData(5, 1, 4)]
+        [InlineData(0, 1, 0)]
+        public void Test_BackStagePassesQualityBehavior(int sellIn, int initialQuality, int expectedQuality)
         {
-            var item = new Item { Name = BACKSTAGE, SellIn = 10, Quality = 1 };
+            var item = new Item { Name = BACKSTAGE, SellIn = sellIn, Quality = initialQuality };
             var rose = new GildedRose(new List<Item> { item });
             rose.UpdateQuality();
-            Assert.Equal(3, item.Quality);
+            Assert.Equal(expectedQuality, item.Quality);
         }
     }
 }
