@@ -10,6 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		GildedRoseRquirements.md = GildedRoseRquirements.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRoseTests", "GildedRoseTests\GildedRoseTests.csproj", "{3E15F01F-6086-4DCD-8280-9854AD3A7861}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FD5DA9CB-EBEB-4DC3-A3B7-11E357D31053} = {FD5DA9CB-EBEB-4DC3-A3B7-11E357D31053}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +25,10 @@ Global
 		{FD5DA9CB-EBEB-4DC3-A3B7-11E357D31053}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD5DA9CB-EBEB-4DC3-A3B7-11E357D31053}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD5DA9CB-EBEB-4DC3-A3B7-11E357D31053}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E15F01F-6086-4DCD-8280-9854AD3A7861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E15F01F-6086-4DCD-8280-9854AD3A7861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E15F01F-6086-4DCD-8280-9854AD3A7861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E15F01F-6086-4DCD-8280-9854AD3A7861}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
